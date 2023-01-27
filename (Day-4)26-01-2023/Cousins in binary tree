@@ -1,0 +1,36 @@
+//cousins in binary tree
+class Solution {
+    int z=-1;
+    int k=-1;
+    int xd=-1;
+    int yd=-1;
+    public boolean isCousin(TreeNode root, int x, int y, int h) {
+  
+        if((root.left!=null && root.left.val==x) || (root.right!=null && root. right. val==x)){
+             z=root.val;
+             xd=h;
+        }
+        if((root.left!=null && root.left.val==y) ||(root.right!=null && root.right.val==y)){
+             k=root.val;
+             yd=h;
+        }
+        if(root.left!=null){
+        isCousin(root.left,x, y,h+1) ;
+         }
+        if(root.right!=null) {
+        isCousin(root.right, x, y, h+1);
+          }
+        if(z==k || xd!=yd){
+            return false;
+        }
+
+       System. out. println(z) ;
+       System. out. println(k) ;
+       return true;
+        
+    }
+    public boolean isCousins(TreeNode root, int x, int y) {
+        return isCousin(root, x, y, 0) ;
+    }
+
+}
