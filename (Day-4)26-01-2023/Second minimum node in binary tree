@@ -1,0 +1,30 @@
+//second minimum node in binary tree
+class Solution {
+    long min2=Long.MAX_VALUE;
+    int min;
+    int f=0;
+    public int findSecondMinimum(TreeNode root) {
+        if(root.left!=null){
+           findSecondMinimum(root.left);
+        }
+        if(root.right!=null) {
+            findSecondMinimum(root.right) ;
+        }
+        if(root.val>min && root. val<min2) {
+            f=1;
+            min2=root.val;
+        }
+        if(root.val<min) {
+
+            min2=min;
+            min=root.val;
+        }
+        return min2<Long.MAX_VALUE?(int)min2:-1;
+
+    }
+    public int findSecondMinimumValue(TreeNode root) {
+        min=root.val;
+        return findSecondMinimum(root);
+       
+    }
+}
