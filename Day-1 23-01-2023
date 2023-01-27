@@ -84,3 +84,82 @@ class Solution {
     }
 
 }
+
+//string to integer(atoi) 
+class Solution {
+    public int myAtoi(String s) {
+        String ans="";
+        s=s.trim();
+        if(s.length()==0){
+            return 0;
+        }
+        if(s.length()==1 && (!(Character.isDigit(s.charAt(0))))){
+            return 0;
+        }
+        if(!(s.charAt(0)=='+' || s.charAt(0)=='-' || Character.isDigit(s.charAt(0)))){
+            return 0;
+        }
+        else{
+            int i=1;
+            ans=String.valueOf(s.charAt(0));
+            while(i<s.length()){
+                if(Character.isDigit(s.charAt(i))){
+                    ans+=s.charAt(i);
+                   // System.out.println(ans);
+                    i++;
+                }
+                else{
+                    break;
+                }
+            }
+            double res=Double.valueOf(ans);
+            if(res<=Integer.MAX_VALUE && res>= Integer.MIN_VALUE){
+                return (int)res;
+            }
+            else{
+                if(s.charAt(0)=='-'){
+                    return Integer.MIN_VALUE;
+                }
+                else{
+                    return Integer.MAX_VALUE;
+                }    
+        } 
+    }
+}
+
+
+// Longest substring with k repeating characters
+class Solution {
+    public int longestSubstring(String s, int k) {
+       HashMap<Character,Integer> hmap=new HashMap<>();
+        int max=0;
+        int flag=0;
+        for(int i=0;i<s.length();i++){
+            char c=s.charAt(i);
+            if(hmap.containsKey(c)){
+                hmap.put(c,hmap.get(c)+1);
+            }
+            else{
+                hmap.put(c,1);
+            }
+        }
+        int p=0;
+        while(p<s.length()){
+            if(hmap.get(s.charAt(p))<k){
+                 flag=1;
+                 int z=longestSubstring(s.substring(0,p),k);
+                 int y=longestSubstring(s.substring(p+1),k);
+                 max=Integer.max(z,y);
+                 break;
+            }
+            else{
+                p+=1;
+            }
+        }
+        if(flag==0){
+            max=s.length();
+        }
+        return max;
+    }
+}
+
