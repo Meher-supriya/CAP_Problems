@@ -1,0 +1,20 @@
+//binary tree paths
+class Solution {
+    ArrayList<String> l=new ArrayList<>();
+    public void fnc(TreeNode root,String ans){
+        if(root==null){
+            return;
+        }
+        ans=ans+root.val;
+        if(root.left==null && root.right==nuclassll){
+            l.add(ans);
+        }
+        ans=ans+"->";
+        fnc(root.left,ans);
+        fnc(root.right,ans);
+    }
+    public List<String> binaryTreePaths(TreeNode root) {
+        fnc(root,"");
+        return l;
+    }
+}
