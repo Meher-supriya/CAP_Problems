@@ -1,0 +1,25 @@
+// balanaced binary tree
+class Solution {
+    int h=0;
+    public int height(TreeNode root){
+         if(root==null){
+            return 0;
+        }
+        int l=height(root.left);
+        int r=height(root.right);
+        if(Math.abs(l-r)>=2){
+            return -1;
+        }
+        if(l==-1 || r==-1){
+            return -1;
+        }
+      return Math.max(l,r)+1;
+    }
+    public boolean isBalanced(TreeNode root) {
+       int z=height(root);
+       if(z==-1){
+           return false;
+       }
+        return true;
+    }
+}
