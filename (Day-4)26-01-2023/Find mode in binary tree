@@ -1,0 +1,41 @@
+//find mode in binary tree
+class Solution {
+    ArrayList<Integer> l=new ArrayList<>();
+    ArrayList<Integer> z=new ArrayList<>() ;
+    int d=0;
+    HashMap<Integer, Integer> hmap=new HashMap<>();
+    int max=0;
+    public void in(TreeNode root){
+        if(root==null){return;}
+        in(root.left);
+        l.add(root.val) ;
+        in(root.right);
+      }
+    public int[] findMode(TreeNode root) {
+        in(root) ;
+        for(int i=0;i<l.size() ;i++) {
+      if(hmap.containsKey(l.get(i))) {
+  hmap.put(l.get(i),hmap.get(l.get(i))+1) ;
+        }
+   else{
+       hmap. put(l.get(i), 1) ;
+   }
+     }
+      for(int z:hmap.keySet()){
+          if(hmap.get(z)>max) {
+              max=hmap.get(z) ;
+          }
+      }
+      for(int x:hmap.keySet()) {
+          if(hmap.get(x)==max) {
+              z.add(x);
+          }
+      }
+        int[] ans =new int[z.size()];
+        for(int i=0;i<z.size();i++) {
+            ans[i]=z.get(i) ;
+        }
+        return ans;
+
+    }
+}
