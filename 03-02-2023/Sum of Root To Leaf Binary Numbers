@@ -1,0 +1,23 @@
+class Solution {
+    ArrayList<String> l=new ArrayList<>();
+    int sum=0;
+    public void fnc(TreeNode root,String val){
+        if(root.right==null && root.left==null){
+            l.add(val+=Integer.toString(root.val));
+        }
+        val+=root.val; 
+        if(root.left!=null){
+            fnc(root.left,val);
+        }
+        if(root.right!=null){
+            fnc(root.right,val);
+        }
+    }
+    public int sumRootToLeaf(TreeNode root) {
+        fnc(root,"");
+        for(String i:l){
+            sum+=Integer.parseInt(i,2);
+        }
+        return sum;
+    }
+}
