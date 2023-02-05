@@ -1,0 +1,18 @@
+class Solution {
+    long max=Long.MAX_VALUE;
+    long min=Long.MIN_VALUE;
+    boolean l;
+    boolean r;
+    public boolean fnc(TreeNode root,long min,long max){
+        if(root==null){
+            return true;
+        }
+        if(root.val>=max || root.val<=min){
+            return false;
+        }
+        return fnc(root.left,min,root.val)&&fnc(root.right,root.val,max);
+    }
+    public boolean isValidBST(TreeNode root) {
+        return fnc(root,min,max);
+    }
+}
