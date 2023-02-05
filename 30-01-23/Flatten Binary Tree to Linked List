@@ -1,0 +1,22 @@
+class Solution {
+    ArrayList<TreeNode> l=new ArrayList<>();
+    public void preorder(TreeNode root){
+        if(root==null)
+            return;
+        l.add(root);
+        preorder(root.left);
+        preorder(root.right);
+    }
+    public void flatten(TreeNode root) {
+        preorder(root);
+        if(root!=null){
+            root=l.get(0);
+            for(int i=1;i<l.size();i++){
+                //System.out.println(l.get(i).val);
+                root.left=null;
+                root.right=l.get(i);
+                root=root.right;
+            }
+        }
+    }
+}
