@@ -1,0 +1,33 @@
+class Solution {
+    long sum;
+    int c;
+    List<Double> l1=new ArrayList<>();
+    List<Double> l=new ArrayList<>();
+    public void fnc(TreeNode root){
+      Queue<TreeNode> q=new LinkedList<>();
+      q.add(root);
+      while(!q.isEmpty()){
+          int size = q.size();
+          sum=0;
+          c=0;
+          for(int i=1;i<=size;i++){
+              TreeNode curr=q.poll();
+              sum+=curr.val;
+              c+=1;
+              if(curr.left!=null){
+                  q.add(curr.left);
+              }
+              if(curr.right!=null){
+                  q.add(curr.right);
+              }   
+          }
+          //System.out.print(sum+" "+c);
+          l1.add((double)sum/c);
+      }
+    }
+    public List<Double> averageOfLevels(TreeNode root) {
+        fnc(root);
+        //System.out.println(l1);
+        return l1;
+    }
+}
