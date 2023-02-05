@@ -1,0 +1,22 @@
+class Solution {
+    int sum=0;
+    public void fnc(TreeNode root){
+        if(root==null){
+            return;
+        }
+        convertBST(root.right);
+        root.val=root.val+sum;
+        sum=root.val;
+        if(root.left!=null){
+            convertBST(root.left);
+        }
+        return;
+    }
+    public TreeNode convertBST(TreeNode root) {
+        if(root==null){
+            return root;
+        }
+        fnc(root);
+        return root;
+    }
+}
