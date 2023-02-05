@@ -1,0 +1,17 @@
+class Solution {
+    long min_diff=Long.MAX_VALUE;
+    int pre=-1;
+    public int getMinimumDifference(TreeNode root) {
+        if(root.left!=null){
+             getMinimumDifference(root.left);
+        }
+        if(pre!=-1){
+            min_diff= Math.min(min_diff,Math.abs(pre-root.val));
+        }
+            pre=root.val;
+        if(root.right!=null){
+             getMinimumDifference(root.right);
+        }
+        return (int)min_diff;
+    }
+}
