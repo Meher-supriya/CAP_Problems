@@ -1,0 +1,15 @@
+class Solution {
+    public TreeNode fnc(int[] nums,int low,int high){
+        int mid=(low+high)/2;
+        if(high<low){
+            return null;
+        }
+        TreeNode t=new TreeNode(nums[mid]);
+        t.left=fnc(nums,low,mid-1);
+        t.right=fnc(nums,mid+1,high);
+        return t; 
+    }
+    public TreeNode sortedArrayToBST(int[] nums) {
+        return fnc(nums,0,nums.length-1);
+    }
+}
