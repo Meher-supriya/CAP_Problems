@@ -1,0 +1,17 @@
+class Solution {
+    int sum=0;
+    public void check(TreeNode root, int low, int high){
+        if(root==null){
+            return;
+        }
+        check(root.left,low,high);
+        if(root.val>=low && root.val<=high){
+            sum+=root.val;
+        }
+        check(root.right,low,high);
+    }
+    public int rangeSumBST(TreeNode root, int low, int high) {
+        check(root,low,high);
+        return sum;
+    }
+}
