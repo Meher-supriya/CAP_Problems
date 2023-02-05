@@ -1,0 +1,20 @@
+class Solution {
+    HashMap<Integer,Integer> hmap=new HashMap<>();
+   // ArrayList<Integer> l=new ArrayList<>();
+    public void fnc(TreeNode root,int level){
+        if(hmap.containsKey(level)==false){
+            hmap.put(level,root.val);
+        }
+        if(root.left!=null){
+            fnc(root.left,level+1);
+        }
+        if(root.right!=null){
+            fnc(root.right,level+1);
+        }
+    }
+    public int findBottomLeftValue(TreeNode root) {
+        fnc(root,1);
+        int z=hmap.keySet().size();
+        return hmap.get(z);
+    }
+}
