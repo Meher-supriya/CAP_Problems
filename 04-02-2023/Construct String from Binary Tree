@@ -1,0 +1,20 @@
+class Solution {
+    String str="";
+    public String tree2str(TreeNode root) {
+       str+=root.val;
+        if(root.left==null && root.right!=null){
+            str+="()";
+        }
+        if(root.left!=null){
+            str+="(";
+            tree2str(root.left);
+            str+=")";
+        }
+        if(root.right!=null){
+            str+="(";
+            tree2str(root.right);
+            str+=")";
+        }
+    return str;
+    }
+}
