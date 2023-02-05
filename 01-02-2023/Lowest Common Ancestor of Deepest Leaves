@@ -1,0 +1,19 @@
+class Solution {
+    public int height(TreeNode root){
+        if(root==null)
+            return 0;
+        return 1+Math.max(height(root.left),height(root.right));
+    }
+    public TreeNode lcaDeepestLeaves(TreeNode root) {
+        if(height(root.left)==height(root.right)){
+            return root;
+        }
+        if(height(root.left)>height(root.right)){
+            return lcaDeepestLeaves(root.left);
+        }
+        if(height(root.right)>height(root.left)){
+            return lcaDeepestLeaves(root.right);
+        }
+        return null;
+    }
+}
