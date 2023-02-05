@@ -1,0 +1,25 @@
+class Solution {
+    int i=0;
+    int l=-1;
+    int r=-1;
+    public int kthSmallest(TreeNode root, int k) {
+      if(root.left!=null){
+           l=kthSmallest(root.left,k);
+      }
+      i+=1;
+      // System.out.print(i+" "+root.val+"  "+k+"    ");
+      if(i==k){
+          return root.val;
+      }
+      if(root.right!=null){
+            r=kthSmallest(root.right,k);
+      }
+      if(l!=-1){
+          return l;
+      }
+      if(r!=-1){
+          return r;
+      }
+    return -1;
+    }
+}
