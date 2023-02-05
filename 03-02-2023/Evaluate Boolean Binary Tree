@@ -1,0 +1,22 @@
+class Solution {
+    public boolean evaluateTree(TreeNode root) {
+        boolean l=false,r=false;
+        if(root.val==0){
+            return false;
+        }
+        if(root.val==1){
+            return true;
+        }
+        l=evaluateTree(root.left);
+        r=evaluateTree(root.right);
+        if(root.val==2){
+            System.out.println(l||r);
+            return l || r;
+        }
+        if(root.val==3){
+            System.out.println(l&&r);
+            return  l && r;
+        }
+        return false;
+    }
+}
