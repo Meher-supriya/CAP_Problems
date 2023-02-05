@@ -1,0 +1,29 @@
+class Solution {
+    public TreeNode fnc(TreeNode root,int val,int depth,int level){
+        if(level==depth-1){
+            TreeNode left=new TreeNode(val);
+            TreeNode right=new TreeNode(val);
+            left.left=root.left;
+            right.right=root.right;
+            root.left=left;
+            root.right=right;
+        }
+        else{
+            if(root.left!=null){
+                fnc(root.left,val,depth,level+1);
+            }
+            if(root.right!=null){
+                fnc(root.right,val,depth,level+1);
+            }
+        }
+        return root;  
+    }
+    public TreeNode addOneRow(TreeNode root, int val, int depth) {
+        if(depth==1){
+            TreeNode z=new TreeNode(val);
+            z.left=root;
+            return z;
+        }
+       return fnc(root,val,depth,1); 
+    }
+}
