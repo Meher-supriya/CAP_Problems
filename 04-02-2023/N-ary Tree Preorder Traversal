@@ -1,0 +1,16 @@
+class Solution {
+    ArrayList<Integer> l=new ArrayList<>();
+    public void pre(Node root){
+        if(root==null){
+            return;
+        }
+        l.add(root.val);
+        for(int i=0;i<root.children.size();i++){
+            pre(root.children.get(i));
+        }
+    }
+    public List<Integer> preorder(Node root) {
+        pre(root);
+        return l;
+    }
+}
