@@ -1,0 +1,18 @@
+class Solution {
+    int sum=0;
+    public int findTiltfnc(TreeNode root){
+        if(root==null){
+                return 0;
+            }
+            int l=findTiltfnc(root.left);
+            int r=findTiltfnc(root.right);
+            int z=root.val;
+            root.val=Math.abs(l-r);
+            sum+=root.val;
+            return l+r+z;
+    }
+    public int findTilt(TreeNode root) {
+       findTiltfnc(root);
+       return sum;
+    }
+}
