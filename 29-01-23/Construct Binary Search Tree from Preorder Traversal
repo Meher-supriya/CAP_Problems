@@ -1,0 +1,20 @@
+class Solution {
+    public TreeNode fnc(int[] preorder,int start,int end){
+       if(start > end) return null;
+        
+        TreeNode t = new TreeNode(preorder[start]);
+        int i;
+        for(i=start;i<=end;i++) {
+        if(preorder[i] > t.val)
+            break;
+        }
+        
+        t.left = fnc(preorder, start+1, i-1);
+        t.right = fnc(preorder, i, end);
+        return t;
+        
+    }
+    public TreeNode bstFromPreorder(int[] preorder) {
+        return fnc(preorder,0,preorder.length-1);
+    }
+}
