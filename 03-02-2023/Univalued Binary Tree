@@ -1,0 +1,20 @@
+class Solution {
+    int f=1;
+    public void check(TreeNode root,int val1){
+        if(root==null){
+            return;
+        }
+        if(root.val!=val1){
+            f=0;
+            return;
+        }
+        check(root.left,val1);
+        check(root.right,val1);
+    }
+    public boolean isUnivalTree(TreeNode root) {
+        check(root,root.val);
+        if(f==0){
+            return false;
+        }
+        return true;
+    }
