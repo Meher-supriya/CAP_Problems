@@ -1,0 +1,17 @@
+class Solution {
+    int d=0;
+    public void max(Node root,int depth){
+        if(root==null)
+            return;
+        if(depth>d){
+            d=depth;
+        }
+        for(int i=0;i<root.children.size();i++){
+            max(root.children.get(i),depth+1);
+        }
+    }
+    public int maxDepth(Node root) {
+        max(root,1);
+        return d;
+    }
+}
