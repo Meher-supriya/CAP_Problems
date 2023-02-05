@@ -1,0 +1,30 @@
+class Solution {
+    ArrayList<Integer> l=new ArrayList<>();
+        public TreeNode fnc(int[] nums,int low,int high){
+        int mid=(low+high)/2;
+        if(high<low){
+            return null;
+        }
+        TreeNode t=new TreeNode(nums[mid]);
+        t.left=fnc(nums,low,mid-1);
+        t.right=fnc(nums,mid+1,high);
+        return t; 
+    }
+    public TreeNode sortedListToBST(ListNode head) {
+        if(head==null){
+            return null;
+        }
+        ListNode cur=head;
+        while(cur.next!=null){
+            l.add(cur.val);
+            cur=cur.next;
+        }
+        l.add(cur.val);
+        int[] z=new int[l.size()];
+       for(int i=0;i<l.size();i++){
+           z[i]=l.get(i);
+           //System.out.println(z[i]);
+       }
+    return fnc(z,0,l.size()-1);
+    }
+}
