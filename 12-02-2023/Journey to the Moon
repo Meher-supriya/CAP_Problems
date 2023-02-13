@@ -1,0 +1,52 @@
+class Result {
+
+    /*
+     * Complete the 'journeyToMoon' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. INTEGER n
+     *  2. 2D_INTEGER_ARRAY astronaut
+     */
+    static int count;
+    static ArrayList<Integer> l= new ArrayList<>();
+    public static int dfs(int src,boolean[] visited,List<List<Integer>> adj,int count){
+        visited[src]=true;
+        count=1;
+        for(int i=0;i<adj.get(src).size();i++){
+            int neigh=adj.get(src).get(i);
+            if(!visited[neigh]){
+                count+=dfs(neigh,visited,adj,count);
+            }
+        }
+        return count;
+    }
+    public static int journeyToMoon(int n, List<List<Integer>> astronaut) {
+    // Write your code here
+        List<List<Integer>> adj = new ArrayList<>();
+        boolean[] visited = new boolean[n];
+        for(int i=0;i<n;i++){
+            adj.add(new ArrayList<>());
+        }
+        for(int i=0;i<astronaut.size();i++){
+            adj.get(astronaut.get(i).get(0)).add(astronaut.get(i).get(1));
+            adj.get(astronaut.get(i).get(1)).add(astronaut.get(i).get(0));
+        }
+        for(int i=0;i<adj.size();i++){
+            if(!visited[i]){
+                int y= dfs(i,visited,adj,count);
+                l.add(y);
+            }
+        }
+        int val=(n*(n-1))/2;
+        System.out.println(val);
+        for(int i=0;i<l.size();i++){
+            int z=(l.get(i)*(l.get(i)-1))/2;
+            val=val-z;
+            System.out.println(val+" "+z+" "+l.get(i));
+        }
+        return val;
+
+    }
+
+}
