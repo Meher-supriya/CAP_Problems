@@ -1,0 +1,41 @@
+class Solution {
+    class pair{
+        int row;
+        int col;
+        pair(int row,int col){
+            this.row=row;
+            this.col=col;
+        }
+    }
+    int[] offsetr={-1,0,1,0};
+    int[] offsetc={0,-1,0,1};
+    public int[][] updateMatrix(int[][] mat) {
+        int[][] dup= new int[mat.length][mat[0].length];
+        Queue<pair> q= new LinkedList<>();
+        for(int i=0;i<mat.length;i++){
+            for(int j=0;j<mat[0].length;j++){
+                if(mat[i][j]==0){
+                    q.add(new pair(i,j));
+                    dup[i][j]=0;
+                }
+                else{
+                    dup[i][j]=-1;
+                }
+            }
+        }
+        while(!q.isEmpty()){
+            int row=q.peek().row;
+            int col=q.peek().col;
+            q.poll();
+            for(int i=0;i<offsetr.length;i++){
+                int rv=row+offsetr[i];
+                int cv=col+offsetc[i];
+                if(rv<0 || cv<0 || rv>=mat.length || cv>=mat[0].length || dup[rv][cv]!=-1)
+                    continue;
+                q.add(new pair(rv,cv));
+                dup[rv][cv]=dup[row][col]+1;
+            }
+        }
+        return dup;
+    }
+}
