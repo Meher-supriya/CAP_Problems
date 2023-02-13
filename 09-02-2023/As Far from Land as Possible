@@ -1,0 +1,45 @@
+class Solution {
+    public class pair{
+        int row;
+        int col;
+        pair(int row, int col){
+            this.row = row;
+            this.col = col;
+        }
+    }
+    public int maxDistance(int[][] grid) {
+        Queue<pair> q = new LinkedList<>();
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[i].length;j++){
+                if(grid[i][j]==1){
+                    q.add(new pair(i,j));
+                }
+            }
+        }
+        if(q.size()==0 || q.size()==grid.length*grid[0].length){
+            return -1;
+        }
+        int count = -1;
+        int[] offsetr={-1,0,1,0};
+        int[] offsetc={0,-1,0,1};
+        while(!q.isEmpty()){
+            count++;
+            int size = q.size();
+            for(int j=0;j<size;j++){
+                int rv = q.peek().row;
+                int cv = q.peek().col;
+                q.poll();
+                for(int i=0;i<offsetr.length;i++){
+                    int rowv = rv+offsetr[i];
+                    int colv = cv+offsetc[i];
+                    if(rowv<0 || colv<0 || rowv>=grid.length || colv>=grid.length || grid[rowv][colv]==1){
+                        continue;
+                    }
+                    q.add(new pair(rowv,colv));
+                    grid[rowv][colv]=1;
+                }
+            }
+        }
+        return count;
+    }
+}
