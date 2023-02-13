@@ -1,0 +1,45 @@
+class Result {
+
+    /*
+     * Complete the 'roadsAndLibraries' function below.
+     *
+     * The function is expected to return a LONG_INTEGER.
+     * The function accepts following parameters:
+     *  1. INTEGER n
+     *  2. INTEGER c_lib
+     *  3. INTEGER c_road
+     *  4. 2D_INTEGER_ARRAY cities
+     */
+
+    static int n_cities;
+    public static void dfs(List<List<Integer>> adj, boolean[] visited, int source){
+        visited[source]=true;
+        n_cities++;
+        for(int neigh: adj.get(source)){
+            if(visited[neigh]==false){
+                dfs(adj,visited,neigh);
+            }
+        }
+    }
+    public static long roadsAndLibraries(int n, int c_lib, int c_road, List<List<Integer>> cities) {
+        List<List<Integer>> adj = new ArrayList<>();
+        for(int i=0;i<=n;i++){
+            adj.add(new ArrayList<>());
+        }
+        for(int i=0;i<cities.size();i++){
+            adj.get(cities.get(i).get(0)).add(cities.get(i).get(1));
+            adj.get(cities.get(i).get(1)).add(cities.get(i).get(0));
+        }
+        boolean[] visited = new boolean[n+1];
+        long cost = 0;
+        for(int i=1;i<=n;i++){
+            if(visited[i]==false){
+                n_cities=0;
+                dfs(adj,visited,i);
+                cost+=Math.min(((n_cities-1)*c_road)+(1*c_lib),(n_cities*c_lib));
+            }
+        }
+        return cost;
+    }
+
+}
