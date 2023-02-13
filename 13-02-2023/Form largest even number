@@ -1,0 +1,17 @@
+a=list(set(str(input())))
+s=""
+small=-1;
+for i in a: 
+    if(i.isdigit()):
+        s+=i
+z=''.join(sorted(s))
+for i in range(len(z)):
+    if(int(z[i])%2==0):
+        small=z[i]
+        z=z[i]+z[0:i]+z[i+1::]
+        break;
+if(small==-1):
+    print(-1);
+else:
+    print(z[::-1]);
+    
