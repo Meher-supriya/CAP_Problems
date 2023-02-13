@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    //static ArrayList<Character> l= new ArrayList<>();
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner scan=new Scanner(System.in);
+        String s=scan.nextLine();
+        String z=s;
+        String str="";
+        for(int i=0;i<s.length();i++){
+            if(!(Character.isDigit(s.charAt(i)) || Character.isLetter(s.charAt(i)))){
+                // l.add(s.charAt(i));
+                s=s.substring(0,i)+s.substring(i+1);
+                i=i-1;
+                //System.out.println(s.charAt(i));
+            }
+        }
+        int j=s.length()-1;
+        for(int i=0;i<z.length();i++){
+            if(!(Character.isDigit(z.charAt(i)) || Character.isLetter(z.charAt(i)))){
+                str+=z.charAt(i);
+            }
+            else{
+                str+=s.charAt(j);
+                j=j-1;
+            }
+        }
+        System.out.println(str);
+    }
+}
