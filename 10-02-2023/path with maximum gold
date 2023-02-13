@@ -1,0 +1,28 @@
+class Solution {
+    int max_time=0;
+    int[] offsetr={-1,0,1,0};
+    int[] offsetc={0,-1,0,1};
+    public void dfs(int[][] grid,int row,int col,int val){
+        int temp=grid[row][col];
+        grid[row][col]=0;
+        for(int i=0;i<offsetr.length;i++){
+            int rv=row+offsetr[i];
+            int cv=col+offsetc[i];
+            max_time=Math.max(max_time,val);
+            if(rv<0 || cv<0 || rv>=grid.length || cv>=grid[0].length || grid[rv][cv]==0)
+               continue;
+            dfs(grid,rv,cv,val+grid[rv][cv]);
+        }
+        grid[row][col]=temp;
+    }
+    public int getMaximumGold(int[][] grid) {
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j]!=0){
+                    dfs(grid,i,j,grid[i][j]);
+                }
+            }
+        }
+        return max_time;
+    }
+}
