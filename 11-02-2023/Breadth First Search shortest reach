@@ -1,0 +1,46 @@
+class Result {
+
+    /*
+     * Complete the 'bfs' function below.
+     *
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts following parameters:
+     *  1. INTEGER n
+     *  2. INTEGER m
+     *  3. 2D_INTEGER_ARRAY edges
+     *  4. INTEGER s
+     */
+
+    static List<List<Integer>> adj;
+    public static List<Integer> bfs(int n, int m, List<List<Integer>> edges, int s) {
+        adj = new ArrayList<>();
+        for(int i=0;i<=n;i++){
+            adj.add(new ArrayList<>());
+        }
+        for(int i=0;i<m;i++){
+            adj.get(edges.get(i).get(0)).add(edges.get(i).get(1));
+            adj.get(edges.get(i).get(1)).add(edges.get(i).get(0));
+        }
+        int[] arr = new int[n+1];
+        Arrays.fill(arr,-1);
+        arr[s]=0;
+        Queue<Integer> q = new LinkedList<>();
+        q.add(s);
+        List<Integer> l = new ArrayList<>();
+        while(!q.isEmpty()){
+            int value = q.poll();
+            for(int neigh: adj.get(value)){
+                if(arr[neigh]==-1){
+                    arr[neigh]=arr[value]+6;
+                    q.add(neigh);
+                }
+            }
+        }
+        for(int i=1;i<arr.length;i++){
+            if(i!=s){
+                l.add(arr[i]);
+            }
+        }
+        return l;
+    }
+}
