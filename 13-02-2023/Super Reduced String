@@ -1,0 +1,45 @@
+class Result {
+
+    /*
+     * Complete the 'superReducedString' function below.
+     *
+     * The function is expected to return a STRING.
+     * The function accepts STRING s as parameter.
+     */
+    static int flag=0;
+    public static String fnc(String s){
+        for(int i=0;i<s.length()-1;i++){
+            if(s.charAt(i)==s.charAt(i+1)){
+                if(i+2<s.length()){
+                    s=s.substring(0,i)+s.substring(i+2);
+                    if(i-2>=0){
+                        i=i-2;
+                    }
+                }
+                else{
+                    s=s.substring(0,i);
+                }
+            }
+        }
+        if(s.length()==0){
+            flag=1;
+            return s;
+        }
+        if(s.length()==2 && s.charAt(0)==s.charAt(1)){
+            flag=1;
+            return s;
+        }  
+        return s;
+    }
+    public static String superReducedString(String s) {
+    // Write your code here
+        String z=fnc(s);
+        if(flag==1){
+            //System.out.println("Empty String");
+            return "Empty String";
+        }
+        return z;
+
+    }
+
+}
