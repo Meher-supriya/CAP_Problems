@@ -1,0 +1,56 @@
+class Result {
+
+    /*
+     * Complete the 'quickestWayUp' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. 2D_INTEGER_ARRAY ladders
+     *  2. 2D_INTEGER_ARRAY snakes
+     */
+    static HashMap<Integer,Integer> hmap= new HashMap<>();
+    static Set<Integer> taken;
+    public static void fnc(List<List<Integer>> ladders, List<List<Integer>> snakes){
+        for(List<Integer> ladder: ladders){
+            hmap.put(ladder.get(0),ladder.get(1));
+        }
+        for(List<Integer> snake:snakes){
+            hmap.put(snake.get(0),snake.get(1));
+        }
+    }
+    public static int quickestWayUp(List<List<Integer>> ladders, List<List<Integer>> snakes) {
+        int minrolls=0;
+        fnc(ladders,snakes);
+        Queue<Integer> q= new LinkedList<>();
+        taken= new HashSet<Integer>();
+        // for(int k: hmap.keySet()){
+        //     System.out.println(k+" "+hmap.get(k));
+        // }
+        q.add(1);
+        while(!q.isEmpty()){
+            minrolls++;
+            int size=q.size();
+            for(int i=0;i<size;i++){
+                int val=q.poll();
+                for(int j=6;j>0;j--){
+                    int newpos=val+j;
+                    if(hmap.containsKey(newpos)){
+                        taken.add(newpos);
+                        newpos=hmap.get(newpos);
+                    }
+                    if(newpos==100){
+                        hmap.clear();
+                        return minrolls;
+                    }
+                    if(!taken.contains(newpos) && newpos<100){
+                        taken.add(newpos);
+                        q.add(newpos);
+                    }
+                }
+            }
+        }
+        hmap.clear();
+        return -1;
+    }
+
+}
