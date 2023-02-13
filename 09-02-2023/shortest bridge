@@ -1,0 +1,58 @@
+class Solution {
+    int[] offsetr={-1,0,1,0};
+    int[] offsetc={0,-1,0,1};
+    int flag=0;
+    Queue<pair> q= new LinkedList<>();
+    public class pair{
+        int row;
+        int col;
+        pair(int row,int col){
+            this.row=row;
+            this.col=col;
+        }
+    }
+    public void dfs(int row,int col,int[][] grid,boolean[][] visited){
+        if(row<0 || col<0 || row>=grid.length || col>=grid[0].length || grid[row][col]==0 || visited[row][col])
+            return;
+        visited[row][col]=true;
+        q.add(new pair(row,col));
+        for(int i=0;i<offsetr.length;i++){
+            dfs(row+offsetr[i],col+offsetc[i],grid,visited);
+        }
+    }
+    public int shortestBridge(int[][] grid) {
+        boolean[][] visited=new boolean[grid.length][grid[0].length];
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(flag==1)
+                    break;
+                if(grid[i][j]==1){
+                    dfs(i,j,grid,visited);
+                    flag=1;
+                    break;
+                }
+            }
+        }
+    int count=0;
+    while(!q.isEmpty()){
+        int size=q.size();
+        for(int j=0;j<size;j++){
+            int rowv=q.peek().row;
+            int colv=q.peek().col;
+            q.poll();
+            for(int i=0;i<offsetr.length;i++){
+                int rv=rowv+offsetr[i];
+                int cv=colv+offsetc[i];
+                if(rv<0 || cv<0 || rv>=grid.length || cv>= grid[0].length || visited[rv][cv])
+                    continue;
+                if(grid[rv][cv]==1)
+                    return count;
+                q.add(new pair(rv,cv));
+                visited[rv][cv]=true;
+            }
+        }
+        count++;
+    }
+    return count;
+}
+}    
